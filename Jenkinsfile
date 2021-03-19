@@ -12,7 +12,7 @@ pipeline {
         stage('Build NodeJS Container') {
             steps {
 		       script {
-                   dockerNodeImage = docker.build registryNodejs + ":$BUILD_NUMBER" + "-f api/Dockerfile"
+                   dockerNodeImage = docker.build registryNodejs + ":$BUILD_NUMBER" + " -f api/Dockerfile"
                }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
 	    stage('Build Angular App Container') {
 	        steps {
 		        script {
-                    dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER" "-f app-ui/Dockerfile"
+                    dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER" + " -f app-ui/Dockerfile"
 		        }
 	        }
 	    }
