@@ -41,8 +41,9 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                    dockerNodeImage.push()
-			        dockerAngImage.push()
+                        dockerNodeImage.push()
+			            dockerAngImage.push()
+                    }
                 }
             }
         }
@@ -59,7 +60,7 @@ pipeline {
             steps {
                 script {
                     sh "cd .."
-		    sh "docker-compose up"
+		            sh "docker-compose up"
                 }
             }
         }
