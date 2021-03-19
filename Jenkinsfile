@@ -15,7 +15,7 @@ pipeline {
 		           sh "cd api"
                }
                script {
-                   dockerNodeImage = docker.build Dockerregistry + ":$BUILD_NUMBER"
+                   dockerNodeImage = docker.build registryNodejs + ":$BUILD_NUMBER"
                 }
                 script {
                     sh "cd .."
@@ -29,7 +29,7 @@ pipeline {
 		            sh "cd app-ui"
 		        }
 		        script {
-		            dockerAngImage = docker.build Dockerregistry + ":$BUILD_NUMBER"
+		            dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER"
 		        }
                 script {
                     sh "cd .."
