@@ -13,13 +13,9 @@ pipeline {
             steps {
 		       script {
 		           sh "cd api"
-               }
-               script {
                    dockerNodeImage = docker.build registryNodejs + ":$BUILD_NUMBER"
-                }
-                script {
-                    sh "cd .."
-                }
+                   sh "cd .."
+               }
             }
         }
 
@@ -27,13 +23,9 @@ pipeline {
 	        steps {
 		        script {
 		            sh "cd app-ui"
-		        }
-		        script {
-		            dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER"
-		        }
-                script {
+                    dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER"
                     sh "cd .."
-                }
+		        }
 	        }
 	    }
 
