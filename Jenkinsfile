@@ -47,7 +47,9 @@ pipeline {
         stage('Get latest image from Dockerhub and Deploy') {
             steps {
                 script {
-		            sh "docker-compose up"
+                    docker.withRegistry('', registryCredential) {
+                        sh "docker-compose up"
+                    }
                 }
             }
         }
