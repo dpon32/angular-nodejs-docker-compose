@@ -1,9 +1,7 @@
 version: '3'
 services:
   nodejs-server:
-    build:
-      context: ./api
-      dockerfile: Dockerfile-dev
+    image: dpontius32/nodejs
     ports:
       - "3080:3080"
     container_name: node-api
@@ -11,9 +9,7 @@ services:
        - ./api:/usr/src/app/api
        - /usr/src/app/api/node_modules
   angular-ui:
-    build:
-      context: ./app-ui
-      dockerfile: Dockerfile-dev
+    image: dpontius32/angular-app
     ports:
       - "4201:4201"
     container_name: angular-ui
