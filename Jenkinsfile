@@ -29,8 +29,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                        "docker push " + registryNodejs + ":$BUILD_NUMBER"
-			            "docker push " + registryAngularApp + ":$BUILD_NUMBER"
+                        sh "docker push " + registryNodejs + ":$BUILD_NUMBER"
+			            sh "docker push " + registryAngularApp + ":$BUILD_NUMBER"
                     }
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
         stage('Remove all images and containers from agent') {
             steps {
                 script {
-                    sh "docker system prune"
+                    sh "docker system prune -y"
                 }
             }
         }
