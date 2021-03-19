@@ -1,7 +1,7 @@
 version: '3'
 services:
   nodejs-server:
-    image: dpontius32/nodejs
+    image: dpontius32/nodejs:latest
     ports:
       - "3080:3080"
     container_name: node-api
@@ -9,7 +9,7 @@ services:
        - ./api:/usr/src/app/api
        - /usr/src/app/api/node_modules
   angular-ui:
-    image: pontius32/angular-app
+    image: pontius32/angular-app:latest
     ports:
       - "4201:4201"
     container_name: angular-ui
