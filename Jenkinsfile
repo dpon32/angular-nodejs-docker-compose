@@ -13,12 +13,12 @@ pipeline {
             steps {
 		       script {
 		           sh "cd api"
-		       }
-		       script {
-		           sh "mv Dockerfile-dev Dockerfile"
-		       }
+               }
                script {
                    dockerNodeImage = docker.build Dockerregistry + ":$BUILD_NUMBER"
+                }
+                script {
+                    sh "cd .."
                 }
             }
         }
@@ -26,14 +26,14 @@ pipeline {
 	    stage('Build Angular App Container') {
 	        steps {
 		        script {
-		            sh "cd ap-ui"
-		        }
-		        script {
-		            sh "mv Dockerfile-dev Dockerfile"
+		            sh "cd app-ui"
 		        }
 		        script {
 		            dockerAngImage = docker.build Dockerregistry + ":$BUILD_NUMBER"
 		        }
+                script {
+                    sh "cd .."
+                }
 	        }
 	    }
 
