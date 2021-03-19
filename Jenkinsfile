@@ -39,7 +39,7 @@ pipeline {
         stage('Remove all images and containers from agent') {
             steps {
                 script {
-                    sh "docker system prune -y"
+                    sh "docker system prune -f"
                 }
             }
         }
