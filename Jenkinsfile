@@ -12,7 +12,7 @@ pipeline {
         stage('Build NodeJS Container') {
             steps {
 		       script {
-                   dockerNodeImage = docker.build registryNodejs + ":$BUILD_NUMBER" + " -f api/Dockerfile"
+                   docker.build registryNodejs + ":$BUILD_NUMBER" + " -f api/Dockerfile"
                }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
 	    stage('Build Angular App Container') {
 	        steps {
 		        script {
-                    dockerAngImage = docker.build registryAngularApp + ":$BUILD_NUMBER" + " -f app-ui/Dockerfile"
+                    docker.build registryAngularApp + ":$BUILD_NUMBER" + " -f app-ui/Dockerfile"
 		        }
 	        }
 	    }
@@ -29,8 +29,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential) {
-                        dockerNodeImage.push()
-			            dockerAngImage.push()
+                        "docker push " + registryNodejs + ":$BUILD_NUMBER"
+			            "docker push " + registryAngularApp + ":$BUILD_NUMBER"
                     }
                 }
             }
@@ -47,7 +47,6 @@ pipeline {
         stage('Get latest image from Dockerhub and Deploy') {
             steps {
                 script {
-                    sh "cd .."
 		            sh "docker-compose up"
                 }
             }
